@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd7b554441404034f8cf030c541768d7, type: 3}
+  m_Name: TowerConvertData
+  m_EditorClassIdentifier: 
+  _convertRecords:
+  - fromTowerType: 0
+    fromGrade: 1
+    toTowerType: 1
+    toGrade: 1
+    convertPrice: 50
+  - fromTowerType: 0
+    fromGrade: 1
+    toTowerType: 2
+    toGrade: 1
+    convertPrice: 75
