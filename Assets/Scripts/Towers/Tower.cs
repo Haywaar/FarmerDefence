@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Towers.Executor;
 using Units;
 using UnityEngine;
+using Zenject;
 
 namespace Towers
 {
@@ -13,59 +15,55 @@ namespace Towers
       [SerializeField] private Transform _prefabRoot;
       public int Grade => _grade;
 
-      protected TowerParams _params;
       public TowerType TowerType => _towerType;
 
+      private TowerParams _params;
       public TowerParams Params => _params;
 
-      protected List<AbstractEnemy> _targetList = new List<AbstractEnemy>();
-      private int _towerId;
+      private Executor.Executor _executor;
 
+      private int _towerId;
       public int TowerId => _towerId;
 
       private bool isSelected;
-
       public bool IsSelected => isSelected;
+
+      private Player _player;
+
+      [Inject]
+      private void Construct(Player player)
+      {
+         _player = player;
+      }
 
       public void Init()
       {
          _towerId = TowerManager.Instance.Register(this);
          _params = TowerManager.Instance.GetParams(_towerType, _grade);
-         //Get executor
+         _executor = ExecutorFabric.GetExecutor(_towerType);
          ChangeView();
       }
 
-      protected void Execute()
-      {
-         //TODO
-         // shoot
-         // do nothing
-         // slow area
-         
-      }
       private void Start()
       {
          Init();
          StartCoroutine(ExecutingCoroutine());
       }
 
+      //TODO подумать, может отказаться от триггеров и пробегать по зонам и расположениям башен и определять списки там
       private void OnTriggerEnter(Collider other)
       {
          var enemy = other.GetComponent<AbstractEnemy>();
          if (enemy != null)
          {
-            _targetList.Add(enemy);
-            //TODO подумать, может отказаться от триггеров и пробегать по зонам и расположениям башен и определять списки там
+            _executor.AddEnemy(enemy);
             enemy.OnEnemyDied += OnEnemyDied;
          }
       }
 
       private void OnEnemyDied(AbstractEnemy enemy)
       {
-         if (_targetList.Contains(enemy))
-         {
-            _targetList.Remove(enemy);
-         }
+         _executor.RemoveEnemy(enemy);
       }
 
       private void OnTriggerExit(Collider other)
@@ -74,21 +72,17 @@ namespace Towers
          if (enemy != null)
          {
             enemy.OnEnemyDied -= OnEnemyDied;
-            _targetList.Remove(enemy);
+            _executor.RemoveEnemy(enemy);
          }
       }
 
       private IEnumerator ExecutingCoroutine()
       {
-         while (Player.Instance.IsAlive())
+         while (_player.IsAlive())
          {
             yield return new WaitForSeconds(_params.AttackCooldown);
             //TODO не нравится, надо бы общий менеджер написать
-
-            if (_targetList.Count > 0)
-            {
-               Execute();
-            }
+            _executor.Execute(_params, transform.position);
          }
       }
 
@@ -102,7 +96,7 @@ namespace Towers
 
       public void Salvage()
       {
-         _towerType = TowerType.Empty;
+         ChangeType(TowerType.Empty);
          _params = TowerManager.Instance.GetParams(TowerType.Empty, 1);
          _grade = 1;
          ChangeView();
@@ -112,6 +106,7 @@ namespace Towers
       public void ChangeType(TowerType towerType)
       {
          _towerType = towerType;
+         _executor = ExecutorFabric.GetExecutor(_towerType);
       }
 
       public void ChangeView()

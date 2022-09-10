@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Towers;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
-//TODO подруби таки Zenject
 public class MainScreen : MonoBehaviour
 {
     [SerializeField] private Text _healthValueText;
@@ -16,21 +12,29 @@ public class MainScreen : MonoBehaviour
     private const string enemiesKilledPrefix = "Enemies killed: ";
     private const string moneyPrefix = "Money value: ";
 
+    private Player _player;
+    
+    [Inject]
+    private void Construct(Player player)
+    {
+        _player = player;
+    }
+
     private void Start()
     {
-        HealthChanged(Player.Instance.Health);
-        MoneyChanged(Player.Instance.Health);
+        HealthChanged(_player.Health);
+        MoneyChanged(_player.Health);
         _enemiesKilledText.text = enemiesKilledPrefix;
 
-        Player.Instance.HealthChanged += HealthChanged;
-        Player.Instance.PlayerDead += PlayerDead;
-        Player.Instance.MoneyChanged += MoneyChanged;
+        //TODO - on signal bus
+        _player.HealthChanged += HealthChanged;
+        _player.PlayerDead += PlayerDead;
+        _player.MoneyChanged += MoneyChanged;
         TowerManager.Instance.OnTowerClicked += TowerClicked;
     }
 
     private void TowerClicked(int towerId)
     {
-        Debug.LogWarning("On Tower clicked!");
         if (TowerManager.Instance.IsUpgradable(towerId) || TowerManager.Instance.IsConvertable(towerId))
         {
             _towerButtonsHolder.Init(Input.mousePosition, towerId);
@@ -44,11 +48,11 @@ public class MainScreen : MonoBehaviour
 
     private void HealthChanged(int value)
     {
-        _healthValueText.text = healthLabelPrefix + Player.Instance.Health;
+        _healthValueText.text = healthLabelPrefix + _player.Health;
     }
 
     private void MoneyChanged(int value)
     {
-        _moneyText.text = moneyPrefix + Player.Instance.Money;
+        _moneyText.text = moneyPrefix + _player.Money;
     }
 }

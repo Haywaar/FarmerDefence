@@ -4,8 +4,8 @@ namespace Units
     {
         public override void Attack()
         {
-            Player.Instance.DamagePlayer(_damageValue);
-            EnemyManager.Instance.Dispose(this);
+            _player.DamagePlayer(_damageValue);
+            _enemyManager.Dispose(this);
         }
     }
 }

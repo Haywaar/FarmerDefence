@@ -21,6 +21,7 @@ public class TowerParams
     public int SalvagePrice;
     public float AttackCooldown;
     public GameObject Prefab;
+    public GameObject ShootPrefab;
 }
 
 [System.Serializable]

@@ -4,6 +4,14 @@ using System.Collections.Generic;
 using Units;
 using UnityEngine;
 using UnityEngine.Pool;
+using Zenject;
+
+public enum SpawningLogic
+{
+    Periodic = 0,
+    Curve = 1,
+    FileData = 2,
+}
 
 public class EnemyManager : MonoBehaviour
 {
@@ -12,36 +20,30 @@ public class EnemyManager : MonoBehaviour
     [Header("Spawning logic")] [SerializeField]
     private AbstractEnemy _enemyPrefab;
 
+    [SerializeField] private SpawningLogic _spawningLogic;
     [SerializeField] private Transform _spawnPoint;
     [SerializeField] private float curSpawnInterval = 1.0f;
 
     private List<AbstractEnemy> _enemies = new List<AbstractEnemy>();
     private ObjectPool<AbstractEnemy> _pool;
+    private DiContainer _container;
+    private Player _player;
 
-    private EnemyManager()
+    [Inject]
+    private void Construct(DiContainer container, Player player)
     {
+        _container = container;
+        _player = player;
     }
-
-    public static EnemyManager Instance;
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Debug.LogError("DuplicateDetected!");
-            Destroy(gameObject);
-        }
-        
         _pool = new ObjectPool<AbstractEnemy>(OnCreatedPoolItem, OnTakeFromPool, OnRelease, OnEnemyDestroy, true, 500);
     }
 
     private void OnEnemyDestroy(AbstractEnemy enemy)
     {
-        Debug.LogWarning("ON ENEMY DESTROY");
+        //TODO 
     }
 
 
@@ -52,7 +54,7 @@ public class EnemyManager : MonoBehaviour
 
     private IEnumerator PeriodicallySpawnCoroutine()
     {
-        while (Player.Instance.IsAlive())
+        while (_player.IsAlive())
         {
             SpawnPrefab();
             yield return new WaitForSeconds(curSpawnInterval);
@@ -61,9 +63,6 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnPrefab()
     {
-        
-        //var enemy = GameObject.Instantiate(_enemyPrefab, _spawnPoint.position, Quaternion.identity);
-
         var enemy = _pool.Get();
         enemy.transform.position = _spawnPoint.position;
         _enemies.Add(enemy);
@@ -83,21 +82,21 @@ public class EnemyManager : MonoBehaviour
     public void Dispose(AbstractEnemy enemy)
     {
         _enemies.Remove(enemy);
-       // Destroy(enemy.gameObject);
-       _pool.Release(enemy);
+        _pool.Release(enemy);
     }
-    public void OnTakeFromPool(AbstractEnemy enemy)
+
+    private void OnTakeFromPool(AbstractEnemy enemy)
     {
         enemy.gameObject.SetActive(true);
         enemy.Init();
     }
-    
-    public AbstractEnemy OnCreatedPoolItem()
+
+    private AbstractEnemy OnCreatedPoolItem()
     {
-        var enemy = Instantiate(_enemyPrefab, _spawnPoint.position, Quaternion.identity);
+        var enemy = _container.InstantiatePrefabForComponent<AbstractEnemy>(_enemyPrefab, _spawnPoint);
         return enemy;
     }
-    
+
     private void OnRelease(AbstractEnemy enemy)
     {
         enemy.gameObject.SetActive(false);

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 namespace Units
 {
@@ -18,8 +20,18 @@ namespace Units
 
         private int _waypointId = 0;
         private List<Transform> _waypoints;
+        private float _moveKoef = 1f;
+        private const float MIN_SLOW_KOEF = .3f;
         public event Action<AbstractEnemy> OnEnemyDied;
+        protected EnemyManager _enemyManager;
+        protected Player _player;
 
+        [Inject]
+        private void Construct(EnemyManager enemyManager, Player player)
+        {
+            _enemyManager = enemyManager;
+            _player = player;
+        }
 
         public int Health
         {
@@ -54,15 +66,17 @@ namespace Units
 
         public virtual void Move()
         {
-            var step = _movementSpeed * Time.deltaTime;
+            var step = _movementSpeed * Time.deltaTime * _moveKoef;
             transform.position = Vector3.MoveTowards(transform.position, _waypoints[_waypointId].position, step);
+
+            transform.LookAt(_waypoints[_waypointId].position);
 
             if (Vector3.Distance(transform.position, _waypoints[_waypointId].position) < 0.02f)
             {
                 if (_waypointId == _waypoints.Count - 1)
                 {
                     Attack();
-                    EnemyManager.Instance.Dispose(this);
+                    _enemyManager.Dispose(this);
                 }
                 else
                 {
@@ -86,9 +100,10 @@ namespace Units
             if (!_isDead)
             {
                 _isDead = true;
-                Player.Instance.OnMonsterDead(_rewardPrice);
+                //TODO - On signal BUS
+                _player.OnMonsterDead(_rewardPrice);
                 OnEnemyDied?.Invoke(this);
-                EnemyManager.Instance.Dispose(this);
+                _enemyManager.Dispose(this);
             }
         }
 
@@ -108,7 +123,24 @@ namespace Units
 
         public bool CanMove()
         {
-            return !_isDead && Player.Instance.IsAlive();
+            return !_isDead && _player.IsAlive();
+        }
+
+        //TODO set stacking logic (2 slow towers at 1 enemy)
+        public void SetSlowKoef(float slowKoef)
+        {
+            if (slowKoef < 0f)
+            {
+                slowKoef = MIN_SLOW_KOEF;
+            }
+            else if (slowKoef > 1f)
+            {
+                slowKoef = 1f;
+            }
+            else
+            {
+                _moveKoef = slowKoef;
+            }
         }
 
     }

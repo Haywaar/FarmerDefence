@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Towers;
 using UnityEngine;
+using Zenject;
 
 public class TowerManager : MonoBehaviour
 {
@@ -15,7 +16,14 @@ public class TowerManager : MonoBehaviour
     
     public event Action<int> OnTowerClicked;
     private List<TowerRecord> _towerRecords;
-   
+    private Player _player;
+
+    [Inject]
+    private void Construct(Player player)
+    {
+        _player = player;
+    }
+
     public bool IsUpgradable(int towerId)
     {
         var tower = GetTowerById(towerId);
@@ -23,7 +31,7 @@ public class TowerManager : MonoBehaviour
     }
     private bool CanUpgradeTower(Tower tower)
     {
-        return Player.Instance.Money >= tower.Params.UpgradePrice;
+        return _player.Money >= tower.Params.UpgradePrice;
     }
 
     public void TryUpgradeTower(int towerId)
@@ -35,7 +43,7 @@ public class TowerManager : MonoBehaviour
         if (CanUpgradeTower(tower))
         {
             var towerParams = GetParams(towerType, grade);
-            Player.Instance.ReduceMoney(towerParams.UpgradePrice);
+            _player.ReduceMoney(towerParams.UpgradePrice);
             tower.Upgrade(towerParams);
         }
     }
@@ -109,7 +117,7 @@ public class TowerManager : MonoBehaviour
         var tower = GetTowerById(towerId);
         var salvagePrice = tower.Params.SalvagePrice;
         tower.Salvage();
-        Player.Instance.AddMoney(salvagePrice);
+        _player.AddMoney(salvagePrice);
     }
 
     public int Register(Tower tower)

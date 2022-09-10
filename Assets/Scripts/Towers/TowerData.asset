@@ -21,18 +21,21 @@ MonoBehaviour:
       SalvagePrice: 50
       AttackCooldown: 1
       Prefab: {fileID: 8123885041041802153, guid: bb1b057f19efb514f9ed0252af3e233c, type: 3}
+      ShootPrefab: {fileID: 4717657422476413288, guid: 21ff1fef25093a24da5cb72573bc305c, type: 3}
     - Grade: 2
       DamageValue: 2
       UpgradePrice: 350
       SalvagePrice: 175
       AttackCooldown: 0.75
       Prefab: {fileID: 5038130273551849213, guid: a2c54d66576ac5343a234ebfd2c4548d, type: 3}
+      ShootPrefab: {fileID: 4717657422476413288, guid: 21ff1fef25093a24da5cb72573bc305c, type: 3}
     - Grade: 3
       DamageValue: 3
       UpgradePrice: 500
       SalvagePrice: 250
       AttackCooldown: 0.5
       Prefab: {fileID: 1210744360375661814, guid: 9abedc11ef5a95842a080ac589578b4a, type: 3}
+      ShootPrefab: {fileID: 4717657422476413288, guid: 21ff1fef25093a24da5cb72573bc305c, type: 3}
   _heavyTowerRecord:
     towerType: 2
     TowerParameters:
@@ -42,12 +45,14 @@ MonoBehaviour:
       SalvagePrice: 100
       AttackCooldown: 3
       Prefab: {fileID: 4042305158882602396, guid: 19121e4e532d4ad4dbe442b054b4afca, type: 3}
+      ShootPrefab: {fileID: 4717657422476413288, guid: 21ff1fef25093a24da5cb72573bc305c, type: 3}
     - Grade: 2
       DamageValue: 10
       UpgradePrice: 400
       SalvagePrice: 200
       AttackCooldown: 7
       Prefab: {fileID: 5214860836440925651, guid: 78c9f4723c5cd7a4daa139ca19a30edf, type: 3}
+      ShootPrefab: {fileID: 4717657422476413288, guid: 21ff1fef25093a24da5cb72573bc305c, type: 3}
   _emptyTowerRecord:
     towerType: 0
     TowerParameters:
@@ -57,3 +62,4 @@ MonoBehaviour:
       SalvagePrice: 0
       AttackCooldown: 1
       Prefab: {fileID: 4217162944890331796, guid: e4cb85624edfee34690c4b56b53ff2c5, type: 3}
+      ShootPrefab: {fileID: 0}

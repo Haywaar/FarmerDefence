@@ -5,12 +5,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private Player()
-    {
-    }
-
-    public static Player Instance;
-
     [SerializeField] private int _health = 3;
     [SerializeField] private int _maxHealth = 3;
     [SerializeField] private int _money;
@@ -64,18 +58,6 @@ public class Player : MonoBehaviour
             }
 
             HealthChanged?.Invoke(_health);
-        }
-    }
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
         }
     }
 
