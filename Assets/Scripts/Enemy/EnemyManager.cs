@@ -5,6 +5,7 @@ using Units;
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
+using Zenject.Signals;
 
 public enum SpawningLogic
 {
@@ -15,30 +16,26 @@ public enum SpawningLogic
 
 public class EnemyManager : MonoBehaviour
 {
-    //TODO врагов будет много - надо на это настроить отдельный конфиг
-    //TODO и вообще логику спаунинга врагов надо прокачать
-    [Header("Spawning logic")] [SerializeField]
-    private AbstractEnemy _enemyPrefab;
-
-    [SerializeField] private SpawningLogic _spawningLogic;
     [SerializeField] private Transform _spawnPoint;
-    [SerializeField] private float curSpawnInterval = 1.0f;
 
     private List<AbstractEnemy> _enemies = new List<AbstractEnemy>();
     private ObjectPool<AbstractEnemy> _pool;
+
     private DiContainer _container;
-    private Player _player;
+    private SignalBus _signalBus;
+
+    private MonoMemoryPool<AbstractEnemy> _monoPool;
 
     [Inject]
-    private void Construct(DiContainer container, Player player)
+    private void Construct(DiContainer container, Player player, SignalBus signalBus)
     {
         _container = container;
-        _player = player;
+        _signalBus = signalBus;
     }
 
     private void Awake()
     {
-        _pool = new ObjectPool<AbstractEnemy>(OnCreatedPoolItem, OnTakeFromPool, OnRelease, OnEnemyDestroy, true, 500);
+        //   _pool = new ObjectPool<AbstractEnemy>(OnCreatedPoolItem, OnTakeFromPool, OnRelease, OnEnemyDestroy, true, 500);
     }
 
     private void OnEnemyDestroy(AbstractEnemy enemy)
@@ -49,24 +46,25 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(PeriodicallySpawnCoroutine());
+        _signalBus.Subscribe<SpawnEnemySignal>(OnSignalSpawn);
     }
 
-    private IEnumerator PeriodicallySpawnCoroutine()
+    private void OnSignalSpawn(SpawnEnemySignal signal)
     {
-        while (_player.IsAlive())
-        {
-            SpawnPrefab();
-            yield return new WaitForSeconds(curSpawnInterval);
-        }
+        var enemy = signal.Enemy;
+        var go = Instantiate(enemy, _spawnPoint.position, Quaternion.identity);
+        _container.Inject(go);
+        //   enemy.transform.position = _spawnPoint.position;
+        go.Init();
+        _enemies.Add(go);
     }
 
-    private void SpawnPrefab()
-    {
-        var enemy = _pool.Get();
-        enemy.transform.position = _spawnPoint.position;
-        _enemies.Add(enemy);
-    }
+    // private void SpawnPrefab()
+    // {
+    //     var enemy = _pool.Get();
+    //     enemy.transform.position = _spawnPoint.position;
+    //     _enemies.Add(enemy);
+    // }
 
     private void Update()
     {
@@ -82,7 +80,8 @@ public class EnemyManager : MonoBehaviour
     public void Dispose(AbstractEnemy enemy)
     {
         _enemies.Remove(enemy);
-        _pool.Release(enemy);
+        //TODO - fix
+        //    _pool.Release(enemy);
     }
 
     private void OnTakeFromPool(AbstractEnemy enemy)
@@ -93,8 +92,9 @@ public class EnemyManager : MonoBehaviour
 
     private AbstractEnemy OnCreatedPoolItem()
     {
-        var enemy = _container.InstantiatePrefabForComponent<AbstractEnemy>(_enemyPrefab, _spawnPoint);
-        return enemy;
+        //   var enemy = _container.InstantiatePrefabForComponent<AbstractEnemy>(_enemyPrefab, _spawnPoint);
+        //   return enemy;
+        return null;
     }
 
     private void OnRelease(AbstractEnemy enemy)

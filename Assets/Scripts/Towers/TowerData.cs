@@ -11,7 +11,6 @@ public enum TowerType
     SplashTower = 3
 }
 
-//TODO change class to struct
 [System.Serializable]
 public class TowerParams
 {

@@ -68,7 +68,6 @@ public class TowerManager : MonoBehaviour
         var towerParams = GetParams(towerType, grade);
         tower.ChangeType(towerType);
         tower.Upgrade(towerParams);
-        //TODO
     }
 
     private Tower GetTowerById(int towerId)

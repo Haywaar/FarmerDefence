@@ -12,7 +12,6 @@ public class TowerButtonsHolder : MonoBehaviour
         gameObject.SetActive(true);
         transform.position = position;
         int buttonIndex = 0;
-        //TODO как прокидывать кнопки?
         var towerParams = TowerManager.Instance.GetParams(towerId);
         if (TowerManager.Instance.IsUpgradable(towerId))
         {

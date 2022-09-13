@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: EnemyData
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  _enemyRecords:
+  - EnemyType: 0
+    EnemyParams:
+    - Grade: 1
+      MovementSpeed: 2
+      MaxHealth: 2
+      DamageValue: 1
+      RewardPrice: 5
+      Prefab: {fileID: 6991671029649060789, guid: 17b2a51b8abaa2849bf708ade6416014, type: 3}
+    - Grade: 2
+      MovementSpeed: 1
+      MaxHealth: 3
+      DamageValue: 2
+      RewardPrice: 10
+      Prefab: {fileID: 6991671029649060789, guid: 17b2a51b8abaa2849bf708ade6416014, type: 3}
+    - Grade: 3
+      MovementSpeed: 3
+      MaxHealth: 3
+      DamageValue: 3
+      RewardPrice: 30
+      Prefab: {fileID: 6991671029649060789, guid: 17b2a51b8abaa2849bf708ade6416014, type: 3}
+  - EnemyType: 1
+    EnemyParams:
+    - Grade: 1
+      MovementSpeed: 1
+      MaxHealth: 10
+      DamageValue: 10
+      RewardPrice: 20
+      Prefab: {fileID: 7074515490191977853, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}
+    - Grade: 2
+      MovementSpeed: 1
+      MaxHealth: 12
+      DamageValue: 12
+      RewardPrice: 40
+      Prefab: {fileID: 7074515490191977853, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}
+    - Grade: 3
+      MovementSpeed: 2
+      MaxHealth: 14
+      DamageValue: 14
+      RewardPrice: 50
+      Prefab: {fileID: 7074515490191977853, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}

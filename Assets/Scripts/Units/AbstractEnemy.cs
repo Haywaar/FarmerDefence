@@ -25,12 +25,14 @@ namespace Units
         public event Action<AbstractEnemy> OnEnemyDied;
         protected EnemyManager _enemyManager;
         protected Player _player;
+        protected WaypointManager _waypointManager;
 
         [Inject]
-        private void Construct(EnemyManager enemyManager, Player player)
+        private void Construct(EnemyManager enemyManager, Player player, WaypointManager waypointManager)
         {
             _enemyManager = enemyManager;
             _player = player;
+            _waypointManager = waypointManager;
         }
 
         public int Health
@@ -62,6 +64,7 @@ namespace Units
             _waypointId = 0;
             _health = _maxHealth;
             _isDead = false;
+            _waypoints = _waypointManager.GetPositions();
         }
 
         public virtual void Move()
@@ -107,19 +110,7 @@ namespace Units
             }
         }
 
-        private void Start()
-        {
-            //TODO - как стабилизировать?
-            try
-            {
-                _waypoints = WaypointManager.Instance.GetPositions();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
+      
 
         public bool CanMove()
         {
