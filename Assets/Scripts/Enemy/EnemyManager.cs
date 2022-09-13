@@ -17,14 +17,13 @@ public enum SpawningLogic
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private Transform _spawnPoint;
-
+    [SerializeField] private EnemyData _enemyData;
     private List<AbstractEnemy> _enemies = new List<AbstractEnemy>();
     private ObjectPool<AbstractEnemy> _pool;
 
     private DiContainer _container;
     private SignalBus _signalBus;
-
-    private MonoMemoryPool<AbstractEnemy> _monoPool;
+    private EnemyFabric _enemyFabric;
 
     [Inject]
     private void Construct(DiContainer container, Player player, SignalBus signalBus)
@@ -33,38 +32,18 @@ public class EnemyManager : MonoBehaviour
         _signalBus = signalBus;
     }
 
-    private void Awake()
-    {
-        //   _pool = new ObjectPool<AbstractEnemy>(OnCreatedPoolItem, OnTakeFromPool, OnRelease, OnEnemyDestroy, true, 500);
-    }
-
-    private void OnEnemyDestroy(AbstractEnemy enemy)
-    {
-        //TODO 
-    }
-
-
     private void Start()
     {
         _signalBus.Subscribe<SpawnEnemySignal>(OnSignalSpawn);
+        _enemyFabric = new EnemyFabric(_enemyData, _container);
     }
 
     private void OnSignalSpawn(SpawnEnemySignal signal)
     {
-        var enemy = signal.Enemy;
-        var go = Instantiate(enemy, _spawnPoint.position, Quaternion.identity);
-        _container.Inject(go);
-        //   enemy.transform.position = _spawnPoint.position;
-        go.Init();
+        var go = _enemyFabric.CreateEnemy(signal.Grade, signal.EnemyType);
+        go.transform.position = _spawnPoint.transform.position;
         _enemies.Add(go);
     }
-
-    // private void SpawnPrefab()
-    // {
-    //     var enemy = _pool.Get();
-    //     enemy.transform.position = _spawnPoint.position;
-    //     _enemies.Add(enemy);
-    // }
 
     private void Update()
     {
@@ -80,25 +59,6 @@ public class EnemyManager : MonoBehaviour
     public void Dispose(AbstractEnemy enemy)
     {
         _enemies.Remove(enemy);
-        //TODO - fix
-        //    _pool.Release(enemy);
-    }
-
-    private void OnTakeFromPool(AbstractEnemy enemy)
-    {
-        enemy.gameObject.SetActive(true);
-        enemy.Init();
-    }
-
-    private AbstractEnemy OnCreatedPoolItem()
-    {
-        //   var enemy = _container.InstantiatePrefabForComponent<AbstractEnemy>(_enemyPrefab, _spawnPoint);
-        //   return enemy;
-        return null;
-    }
-
-    private void OnRelease(AbstractEnemy enemy)
-    {
-        enemy.gameObject.SetActive(false);
+        _enemyFabric.DisposeEnemy(enemy);
     }
 }

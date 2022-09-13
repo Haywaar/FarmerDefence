@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPoint: {fileID: 697734480}
+  _enemyData: {fileID: 11400000, guid: 07e23689eb44eb64dbf20fb974a91edc, type: 2}
 --- !u!114 &60642840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,14 +330,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemiesConfig:
-  - EnemyPrefab: {fileID: 8108601502763846949, guid: 17b2a51b8abaa2849bf708ade6416014, type: 3}
-    StartCooldown: 1
+  - EnemyType: 0
+    EnemyGrade: 1
+    StartCooldown: 5
     MinCooldown: 1
-    IncreaseCooldownTime: 1
-  - EnemyPrefab: {fileID: 8335414701576623085, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}
-    StartCooldown: 3
+    IncreaseCooldownTime: 60
+  - EnemyType: 1
+    EnemyGrade: 1
+    StartCooldown: 10
     MinCooldown: 3
-    IncreaseCooldownTime: 1
+    IncreaseCooldownTime: 120
 --- !u!1 &142100184
 GameObject:
   m_ObjectHideFlags: 0
@@ -2313,6 +2316,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1805293315}
     m_Modifications:
+    - target: {fileID: 142723645043444574, guid: 40e70935bd4b1ff4c850a52969085347, type: 3}
+      propertyPath: _towerType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3860054726068812694, guid: 40e70935bd4b1ff4c850a52969085347, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4898,7 +4905,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 142723645043444574, guid: 40e70935bd4b1ff4c850a52969085347, type: 3}
       propertyPath: _towerType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3860054726068812694, guid: 40e70935bd4b1ff4c850a52969085347, type: 3}
       propertyPath: m_RootOrder

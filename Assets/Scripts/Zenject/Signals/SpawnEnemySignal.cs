@@ -4,11 +4,13 @@ namespace Zenject.Signals
 {
     public class SpawnEnemySignal
     {
-        public AbstractEnemy Enemy { get; }
-
-        public SpawnEnemySignal(AbstractEnemy enemy)
+        public int Grade;
+        public EnemyType EnemyType;
+        
+        public SpawnEnemySignal(int grade, EnemyType enemyType)
         {
-            Enemy = enemy;
+            Grade = grade;
+            EnemyType = enemyType;
         }
     }
 }

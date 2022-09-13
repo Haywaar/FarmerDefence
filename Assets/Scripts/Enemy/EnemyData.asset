@@ -9,47 +9,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 2b4d016326489b14192293b70cfeee71, type: 3}
   m_Name: EnemyData
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  m_EditorClassIdentifier: 
   _enemyRecords:
   - EnemyType: 0
     EnemyParams:
     - Grade: 1
-      MovementSpeed: 2
-      MaxHealth: 2
+      MovementSpeed: 1
+      MaxHealth: 3
       DamageValue: 1
       RewardPrice: 5
       Prefab: {fileID: 6991671029649060789, guid: 17b2a51b8abaa2849bf708ade6416014, type: 3}
+      MeshColor: {r: 0, g: 0, b: 0, a: 0}
     - Grade: 2
-      MovementSpeed: 1
+      MovementSpeed: 2
       MaxHealth: 3
-      DamageValue: 2
+      DamageValue: 1
       RewardPrice: 10
       Prefab: {fileID: 6991671029649060789, guid: 17b2a51b8abaa2849bf708ade6416014, type: 3}
+      MeshColor: {r: 0, g: 0, b: 0, a: 0}
     - Grade: 3
       MovementSpeed: 3
       MaxHealth: 3
-      DamageValue: 3
-      RewardPrice: 30
+      DamageValue: 1
+      RewardPrice: 15
       Prefab: {fileID: 6991671029649060789, guid: 17b2a51b8abaa2849bf708ade6416014, type: 3}
+      MeshColor: {r: 0, g: 0, b: 0, a: 0}
   - EnemyType: 1
     EnemyParams:
     - Grade: 1
       MovementSpeed: 1
-      MaxHealth: 10
-      DamageValue: 10
-      RewardPrice: 20
+      MaxHealth: 5
+      DamageValue: 2
+      RewardPrice: 15
       Prefab: {fileID: 7074515490191977853, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}
+      MeshColor: {r: 0, g: 0, b: 0, a: 0}
     - Grade: 2
       MovementSpeed: 1
-      MaxHealth: 12
-      DamageValue: 12
-      RewardPrice: 40
+      MaxHealth: 10
+      DamageValue: 2
+      RewardPrice: 30
       Prefab: {fileID: 7074515490191977853, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}
-    - Grade: 3
-      MovementSpeed: 2
-      MaxHealth: 14
-      DamageValue: 14
-      RewardPrice: 50
-      Prefab: {fileID: 7074515490191977853, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}
+      MeshColor: {r: 0, g: 0, b: 0, a: 0}

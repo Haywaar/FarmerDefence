@@ -46,21 +46,21 @@ namespace Enemy.EnemySpawners
             var time = 0.0f;
             while (IsSpawning)
             {
-                Debug.LogWarning("spawning send! Cooldown " + cooldown);
-                _signalBus.Fire(new SpawnEnemySignal(spawnData.EnemyPrefab));
+                _signalBus.Fire(new SpawnEnemySignal(spawnData.EnemyGrade, spawnData.EnemyType));
+
                 yield return new WaitForSeconds(cooldown);
                 time += cooldown;
                 cooldown = Mathf.Lerp(spawnData.StartCooldown, spawnData.MinCooldown,
                     Mathf.Min(time / spawnData.IncreaseCooldownTime, 1));
             }
-            Debug.LogWarning("Spawning stopped");
         }
     }
 
     [System.Serializable]
     public struct PeriodicSpawnData
     {
-        public AbstractEnemy EnemyPrefab;
+        public EnemyType EnemyType;
+        public int EnemyGrade;
         /// <summary>
         /// Cooldown between spawns of different type
         /// </summary>

@@ -10,6 +10,9 @@ namespace Towers.Executor
     {
         public override void Execute(TowerParams towerParams, Vector3 shootPos)
         {
+            if(_targetList.Count == 0)
+                return;
+            
             var target = _targetList[0];
             //TODO - make pool
             var shot = GameObject.Instantiate(towerParams.ShootPrefab, shootPos, Quaternion.identity);

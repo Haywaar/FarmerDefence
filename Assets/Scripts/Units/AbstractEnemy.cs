@@ -13,6 +13,9 @@ namespace Units
         [SerializeField] protected int _maxHealth;
         [SerializeField] protected int _damageValue;
         [SerializeField] protected int _rewardPrice;
+        [SerializeField] protected EnemyType _enemyType;
+
+        public EnemyType EnemyType => _enemyType;
 
         private bool _isDead = false;
 
@@ -59,12 +62,24 @@ namespace Units
 
         public abstract void Attack();
 
-        public virtual void Init()
+        public virtual void Reset()
         {
             _waypointId = 0;
             _health = _maxHealth;
             _isDead = false;
             _waypoints = _waypointManager.GetPositions();
+        }
+
+        public void Init(EnemyParams enemyParams, EnemyType enemyType)
+        {
+            _maxHealth = enemyParams.MaxHealth;
+            _damageValue = enemyParams.DamageValue;
+            _rewardPrice = enemyParams.RewardPrice;
+            _movementSpeed = enemyParams.MovementSpeed;
+            _enemyType = enemyType;
+            //TODO - color
+            
+            Reset();
         }
 
         public virtual void Move()
