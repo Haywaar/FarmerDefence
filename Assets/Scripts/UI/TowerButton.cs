@@ -19,11 +19,11 @@ public class TowerButton : MonoBehaviour
         _towerTypeText.text = String.Empty;
     }
 
-    public void InitForUpgrade(string towerTypeText, int price, UnityAction action)
+    public void InitForUpgrade(Sprite towerTypeSprite, int price, UnityAction action)
     {
         Init();
         _priceText.text = price.ToString();
-        _towerTypeText.text = towerTypeText;
+        _towerIcon.sprite = towerTypeSprite;
         _button.onClick.AddListener(action);
     }
 
@@ -35,11 +35,11 @@ public class TowerButton : MonoBehaviour
         _button.onClick.AddListener(action);
     }
 
-    public void InitForConvert(string towerTypeText, int price, UnityAction action)
+    public void InitForConvert(Sprite towerTypeSprite, int price, UnityAction action)
     {
         Init();
         _priceText.text = price.ToString();
-        _towerTypeText.text = towerTypeText;
+        _towerIcon.sprite = towerTypeSprite;
         _button.onClick.AddListener(action);
     }
 }

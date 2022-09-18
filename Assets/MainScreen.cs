@@ -13,11 +13,13 @@ public class MainScreen : MonoBehaviour
     private const string moneyPrefix = "Money value: ";
 
     private Player _player;
+    private TowerManager _towerManager;
     
     [Inject]
-    private void Construct(Player player)
+    private void Construct(Player player, TowerManager towerManager)
     {
         _player = player;
+        _towerManager = towerManager;
     }
 
     private void Start()
@@ -30,12 +32,17 @@ public class MainScreen : MonoBehaviour
         _player.HealthChanged += HealthChanged;
         _player.PlayerDead += PlayerDead;
         _player.MoneyChanged += MoneyChanged;
-        TowerManager.Instance.OnTowerClicked += TowerClicked;
+        _towerManager.OnTowerClicked += TowerClicked;
     }
 
     private void TowerClicked(int towerId)
     {
-        if (TowerManager.Instance.IsUpgradable(towerId) || TowerManager.Instance.IsConvertable(towerId))
+        if (towerId == -1)
+        {
+            if (_towerButtonsHolder.IsActive())
+                _towerButtonsHolder.Hide();
+        }
+        else if (_towerManager.IsUpgradable(towerId) || _towerManager.IsConvertable(towerId))
         {
             _towerButtonsHolder.Init(Input.mousePosition, towerId);
         }

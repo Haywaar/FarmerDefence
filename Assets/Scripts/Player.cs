@@ -85,8 +85,8 @@ public class Player : MonoBehaviour
     //TODO потом enum с типом причины
     public void ReduceMoney(int value)
     {
-        Money -= value;
-        //TODO - play sad sound effect
+        _money -= value;
+        MoneyChanged?.Invoke(_money);
     }
     
     public void AddMoney(int value)

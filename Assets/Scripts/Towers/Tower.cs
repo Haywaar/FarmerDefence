@@ -13,11 +13,10 @@ namespace Towers
       [SerializeField] private TowerType _towerType;
       [SerializeField] private int _grade = 1;
       [SerializeField] private Transform _prefabRoot;
-      public int Grade => _grade;
-
-      public TowerType TowerType => _towerType;
 
       private TowerParams _params;
+      public int Grade => _grade;
+      public TowerType TowerType => _towerType;
       public TowerParams Params => _params;
 
       private Executor.Executor _executor;
@@ -29,17 +28,19 @@ namespace Towers
       public bool IsSelected => isSelected;
 
       private Player _player;
+      private TowerManager _towerManager;
 
       [Inject]
-      private void Construct(Player player)
+      private void Construct(Player player, TowerManager towerManager)
       {
          _player = player;
+         _towerManager = towerManager;
       }
 
-      public void Init()
+      private void Init()
       {
-         _towerId = TowerManager.Instance.Register(this);
-         _params = TowerManager.Instance.GetParams(_towerType, _grade);
+         _towerId = _towerManager.Register(this);
+         _params = _towerManager.GetParams(_towerType, _grade);
          _executor = ExecutorFabric.GetExecutor(_towerType);
          ChangeView();
       }
@@ -61,11 +62,6 @@ namespace Towers
          }
       }
 
-      private void OnEnemyDied(AbstractEnemy enemy)
-      {
-         _executor.RemoveEnemy(enemy);
-      }
-
       private void OnTriggerExit(Collider other)
       {
          var enemy = other.GetComponent<AbstractEnemy>();
@@ -74,6 +70,11 @@ namespace Towers
             enemy.OnEnemyDied -= OnEnemyDied;
             _executor.RemoveEnemy(enemy);
          }
+      }
+
+      private void OnEnemyDied(AbstractEnemy enemy)
+      {
+         _executor.RemoveEnemy(enemy);
       }
 
       private IEnumerator ExecutingCoroutine()
@@ -97,7 +98,7 @@ namespace Towers
       public void Salvage()
       {
          ChangeType(TowerType.Empty);
-         _params = TowerManager.Instance.GetParams(TowerType.Empty, 1);
+         _params = _towerManager.GetParams(TowerType.Empty, 1);
          _grade = 1;
          ChangeView();
          SetSelected(false);

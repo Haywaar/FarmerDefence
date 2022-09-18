@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum TowerType
 {
@@ -20,6 +21,7 @@ public class TowerParams
     public int SalvagePrice;
     public float AttackCooldown;
     public GameObject Prefab;
+    public Sprite TowerIcon;
     public GameObject ShootPrefab;
 }
 

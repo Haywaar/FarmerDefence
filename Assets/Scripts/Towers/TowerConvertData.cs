@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct ConvertRecord
+public class ConvertRecord
 {
     public TowerType fromTowerType;
     public int fromGrade;
