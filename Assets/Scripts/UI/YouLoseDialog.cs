@@ -6,7 +6,7 @@ public class YouLoseDialog : MonoBehaviour, IWindow
 {
    public void OnTryAgainClicked()
    {
-      //TODO - many levels
+      //TODO - add option to switch level
       LevelManager.LoadMain();
    }
    

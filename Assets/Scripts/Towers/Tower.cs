@@ -51,7 +51,7 @@ namespace Towers
          StartCoroutine(ExecutingCoroutine());
       }
 
-      //TODO подумать, может отказаться от триггеров и пробегать по зонам и расположениям башен и определять списки там
+      //TODO check if it possible to refactor, to avoid OnTrigger and do it by position analysis
       private void OnTriggerEnter(Collider other)
       {
          var enemy = other.GetComponent<AbstractEnemy>();
@@ -82,7 +82,7 @@ namespace Towers
          while (_player.IsAlive())
          {
             yield return new WaitForSeconds(_params.AttackCooldown);
-            //TODO не нравится, надо бы общий менеджер написать
+            //TODO every tower uses execute. Maybe it is possible to move it to 1 manager?
             _executor.Execute(_params, transform.position);
          }
       }
@@ -112,7 +112,7 @@ namespace Towers
 
       public void ChangeView()
       {
-         //TODO - assert?
+         //TODO - assert logic
          if (_prefabRoot == null)
          {
             Debug.LogError("NO PREFAB ROOT DETECTED");

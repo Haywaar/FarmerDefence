@@ -135,6 +135,12 @@ public class TowerManager : MonoBehaviour
         return convertRecord.convertPrice;
     }
 
+    public Sprite GetTypeSprite(TowerType towerType)
+    {
+        var towerParams = GetParams(towerType, 1);
+        return towerParams.TowerIcon;
+    }
+
     public bool TryConvert(int towerId, TowerType towerType, int grade)
     {
         bool convertSuccess = false;

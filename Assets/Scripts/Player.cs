@@ -9,12 +9,11 @@ public class Player : MonoBehaviour
     [SerializeField] private int _maxHealth = 3;
     [SerializeField] private int _money;
 
-
     public Action<int> HealthChanged;
     public Action<int> MoneyChanged;
     public Action PlayerDead;
     
-    //TODO надо это раскопать
+    //TODO change to reactive properties
     public int Money
     {
         get => _money;
@@ -75,14 +74,14 @@ public class Player : MonoBehaviour
         return Health > 0;
     }
 
-    //TODO мне не нравится, перенести в GameManager?
+    //TODO Not sure that player should be responsible for this
     public void OnMonsterDead(int value)
     {
         _money += value;
         MoneyChanged?.Invoke(_money);
     }
 
-    //TODO потом enum с типом причины
+    //TODO add enum with reason of reduce
     public void ReduceMoney(int value)
     {
         _money -= value;

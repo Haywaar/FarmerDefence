@@ -67,5 +67,5 @@ MonoBehaviour:
       SalvagePrice: 0
       AttackCooldown: 1
       Prefab: {fileID: 4217162944890331796, guid: e4cb85624edfee34690c4b56b53ff2c5, type: 3}
-      TowerIcon: {fileID: 0}
+      TowerIcon: {fileID: 21300000, guid: 071091589f2fd7e40b804cb98a10298c, type: 3}
       ShootPrefab: {fileID: 0}

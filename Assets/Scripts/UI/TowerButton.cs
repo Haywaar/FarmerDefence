@@ -9,14 +9,10 @@ public class TowerButton : MonoBehaviour
     [SerializeField] private Image _towerIcon;
     [SerializeField] private Text _priceText;
 
-    //TODO - временно, удоли потом
-    [SerializeField] private Text _towerTypeText;
-
     private void Init()
     {
         _button.onClick.RemoveAllListeners();
         _priceText.text = String.Empty;
-        _towerTypeText.text = String.Empty;
     }
 
     public void InitForUpgrade(Sprite towerTypeSprite, int price, UnityAction action)
@@ -27,11 +23,11 @@ public class TowerButton : MonoBehaviour
         _button.onClick.AddListener(action);
     }
 
-    public void InitForSalvage(int salvagePrice, UnityAction action)
+    public void InitForSalvage(Sprite towerTypeSprite, int salvagePrice, UnityAction action)
     {
         Init();
+        _towerIcon.sprite = towerTypeSprite;
         _priceText.text = "+" + salvagePrice;
-        _towerTypeText.text = "SALVAGE!";
         _button.onClick.AddListener(action);
     }
 

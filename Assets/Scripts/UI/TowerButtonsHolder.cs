@@ -36,7 +36,8 @@ public class TowerButtonsHolder : MonoBehaviour
             //Логику кнопки Salvage
             var salvageButton = _towerButtons[buttonIndex];
             buttonIndex++;
-            salvageButton.InitForSalvage(towerParams.SalvagePrice, () =>
+            var emptyIcon = _towerManager.GetTypeSprite(TowerType.Empty);
+            salvageButton.InitForSalvage(emptyIcon, towerParams.SalvagePrice, () =>
             {
                 _towerManager.SalvageTower(towerId);
                 Hide();
@@ -50,7 +51,8 @@ public class TowerButtonsHolder : MonoBehaviour
             {
                 var convertButton = _towerButtons[buttonIndex];
                 buttonIndex++;
-                convertButton.InitForConvert(towerParams.TowerIcon, price.convertPrice, () =>
+                var towerIcon = _towerManager.GetTypeSprite(price.toTowerType);
+                convertButton.InitForConvert(towerIcon, price.convertPrice, () =>
                 {
                     _towerManager.TryConvert(towerId, price.toTowerType, price.toGrade);
                     Hide();

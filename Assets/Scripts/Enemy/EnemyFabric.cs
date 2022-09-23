@@ -5,7 +5,6 @@ using Zenject;
 public class EnemyFabric
 {
    Dictionary<EnemyType, EnemyPool> _enemyPools = new Dictionary<EnemyType, EnemyPool>();
-
    private EnemyData _enemyData;
    private DiContainer _container;
    
@@ -31,7 +30,7 @@ public class EnemyFabric
        return enemy;
    }
 
-   //TODO - это не фабрика уже получается
+   //TODO - this is not fabric, need refactoring
    public void DisposeEnemy(AbstractEnemy enemy)
    {
        var enemyType = enemy.EnemyType;

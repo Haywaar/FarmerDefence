@@ -101,7 +101,7 @@ namespace Units
                     _waypointId++;
                 }
             }
-        }
+        } 
 
         public virtual void OnDamageTaken(int damageValue)
         {

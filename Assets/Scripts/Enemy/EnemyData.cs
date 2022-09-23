@@ -13,7 +13,7 @@ public class EnemyParams
     public int RewardPrice;
     public GameObject Prefab;
 
-    //TODO 
+    //TODO
     public Color MeshColor;
 }
 

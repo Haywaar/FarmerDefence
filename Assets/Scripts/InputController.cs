@@ -57,7 +57,7 @@ public class InputController : MonoBehaviour
             if (_state == InputState.None)
             {
                 _state = InputState.PositioningTower;
-                //TODO - нужен пул и для башен и для снарядов
+                //TODO - add pool for towers and projectiles
                 _placingGameobject = GameObject.Instantiate(_placeHolder);
                 return;
             }
@@ -77,9 +77,6 @@ public class InputController : MonoBehaviour
             var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                Debug.LogWarning("pos " + hit.point);
-                //TODO видимо прокинуть ссылку на плейн
-                //_placingGameobject.transform.position = new Vector3(hit.point.x, 1, hit.point.z);
                 _placingGameobject.transform.position = hit.point;
             }
 
