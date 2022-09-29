@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 public class Player : MonoBehaviour
 {
@@ -9,11 +10,10 @@ public class Player : MonoBehaviour
     [SerializeField] private int _maxHealth = 3;
     [SerializeField] private int _money;
 
-    public Action<int> HealthChanged;
-    public Action<int> MoneyChanged;
+    public readonly IntReactiveProperty HealthProperty = new IntReactiveProperty();
+    public readonly IntReactiveProperty MoneyProperty = new IntReactiveProperty();
     public Action PlayerDead;
     
-    //TODO change to reactive properties
     public int Money
     {
         get => _money;
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
                 _money = value;
             }
 
-            MoneyChanged?.Invoke(_money);
+           MoneyProperty.Value = _money;
         }
     }
 
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
                 _health = value;
             }
 
-            HealthChanged?.Invoke(_health);
+            HealthProperty.Value = _health;
         }
     }
 
@@ -77,15 +77,13 @@ public class Player : MonoBehaviour
     //TODO Not sure that player should be responsible for this
     public void OnMonsterDead(int value)
     {
-        _money += value;
-        MoneyChanged?.Invoke(_money);
+        Money += value;
     }
 
     //TODO add enum with reason of reduce
     public void ReduceMoney(int value)
     {
-        _money -= value;
-        MoneyChanged?.Invoke(_money);
+      Money -= value;
     }
     
     public void AddMoney(int value)

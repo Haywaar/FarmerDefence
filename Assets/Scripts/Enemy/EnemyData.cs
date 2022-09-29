@@ -13,8 +13,7 @@ public class EnemyParams
     public int RewardPrice;
     public GameObject Prefab;
 
-    //TODO
-    public Color MeshColor;
+    public Material Material;
 }
 
 public enum EnemyType

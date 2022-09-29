@@ -5,6 +5,7 @@ using Units;
 using UnityEngine;
 using Zenject;
 using Zenject.Signals;
+using Cysharp.Threading.Tasks;
 
 namespace Enemy.EnemySpawners
 {
@@ -31,7 +32,8 @@ namespace Enemy.EnemySpawners
             IsSpawning = true;
             foreach (var enemyData in _enemiesConfig)
             {
-                StartCoroutine(PeriodicSpawnCoroutine(enemyData));
+                // StartCoroutine(PeriodicSpawnCoroutine(enemyData));
+               PeriodicSpawnTask(enemyData);
             }
         }
 
@@ -40,20 +42,37 @@ namespace Enemy.EnemySpawners
             IsSpawning = false;
         }
 
+        private async void PeriodicSpawnTask(PeriodicSpawnData spawnData)
+        {
+            var cooldown = spawnData.StartCooldown;
+            var time = 0.0f;
+            await UniTask.Delay((int)(spawnData.PrewarmDelay * 1000));
+            while (IsSpawning)
+            {
+                _signalBus.Fire(new SpawnEnemySignal(spawnData.EnemyGrade, spawnData.EnemyType));
+                await UniTask.Delay((int)(cooldown * 1000));
+                time += cooldown;
+                cooldown = Mathf.Lerp(spawnData.StartCooldown, spawnData.MinCooldown,
+                    Mathf.Min(time / spawnData.IncreaseCooldownTime, 1));
+            }
+        }
+
+
         private IEnumerator PeriodicSpawnCoroutine(PeriodicSpawnData spawnData)
         {
             var cooldown = spawnData.StartCooldown;
             var time = 0.0f;
+            yield return new WaitForSeconds(spawnData.PrewarmDelay);
             while (IsSpawning)
             {
                 _signalBus.Fire(new SpawnEnemySignal(spawnData.EnemyGrade, spawnData.EnemyType));
-
                 yield return new WaitForSeconds(cooldown);
                 time += cooldown;
                 cooldown = Mathf.Lerp(spawnData.StartCooldown, spawnData.MinCooldown,
                     Mathf.Min(time / spawnData.IncreaseCooldownTime, 1));
             }
         }
+        
     }
 
     [System.Serializable]
@@ -61,6 +80,11 @@ namespace Enemy.EnemySpawners
     {
         public EnemyType EnemyType;
         public int EnemyGrade;
+
+        /// <summary>
+        /// Delay between start game and first spawn
+        /// </summary>
+        public float PrewarmDelay;
         /// <summary>
         /// Cooldown between spawns of different type
         /// </summary>

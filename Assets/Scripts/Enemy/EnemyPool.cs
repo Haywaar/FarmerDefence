@@ -30,7 +30,6 @@ public class EnemyPool
         }
         else
         {
-            Debug.LogWarning("no objects for prefab " + _prefab.name + " create new!");
             return Create();
         }
     }

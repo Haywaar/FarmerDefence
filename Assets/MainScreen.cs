@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using UniRx;
 
 public class MainScreen : MonoBehaviour
 {
@@ -25,13 +26,14 @@ public class MainScreen : MonoBehaviour
     private void Start()
     {
         HealthChanged(_player.Health);
-        MoneyChanged(_player.Health);
+        MoneyChanged(_player.Money);
         _enemiesKilledText.text = enemiesKilledPrefix;
 
         //TODO - on signal bus
-        _player.HealthChanged += HealthChanged;
+        _player.HealthProperty.Subscribe(HealthChanged);
+        _player.MoneyProperty.Subscribe(MoneyChanged);
+
         _player.PlayerDead += PlayerDead;
-        _player.MoneyChanged += MoneyChanged;
         _towerManager.OnTowerClicked += TowerClicked;
     }
 
@@ -55,11 +57,11 @@ public class MainScreen : MonoBehaviour
 
     private void HealthChanged(int value)
     {
-        _healthValueText.text = healthLabelPrefix + _player.Health;
+        _healthValueText.text = healthLabelPrefix + value;
     }
 
     private void MoneyChanged(int value)
     {
-        _moneyText.text = moneyPrefix + _player.Money;
+        _moneyText.text = moneyPrefix + value;
     }
 }

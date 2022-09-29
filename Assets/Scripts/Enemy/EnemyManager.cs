@@ -30,10 +30,6 @@ public class EnemyManager : MonoBehaviour
     {
         _container = container;
         _signalBus = signalBus;
-    }
-
-    private void Start()
-    {
         _signalBus.Subscribe<SpawnEnemySignal>(OnSignalSpawn);
         _enemyFabric = new EnemyFabric(_enemyData, _container);
     }

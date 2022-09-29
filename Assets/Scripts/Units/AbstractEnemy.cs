@@ -15,6 +15,8 @@ namespace Units
         [SerializeField] protected int _rewardPrice;
         [SerializeField] protected EnemyType _enemyType;
 
+        [SerializeField] protected List<MeshRenderer> _colorableMeshes;
+
         public EnemyType EnemyType => _enemyType;
 
         private bool _isDead = false;
@@ -78,7 +80,12 @@ namespace Units
             _movementSpeed = enemyParams.MovementSpeed;
             _enemyType = enemyType;
             //TODO - color
-            
+            foreach (var mesh in _colorableMeshes)
+            {
+                mesh.material = enemyParams.Material;
+            }
+            gameObject.name = enemyType.ToString() + "_" + enemyParams.Grade;
+
             Reset();
         }
 
@@ -124,8 +131,6 @@ namespace Units
                 _enemyManager.Dispose(this);
             }
         }
-
-      
 
         public bool CanMove()
         {
