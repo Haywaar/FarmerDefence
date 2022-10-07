@@ -27,7 +27,9 @@ public class TowerButtonsHolder : MonoBehaviour
             //Инитим кнопку Upgrade
             var upgradeButton = _towerButtons[buttonIndex];
             buttonIndex++;
-            upgradeButton.InitForUpgrade(towerParams.TowerIcon, towerParams.UpgradePrice, () =>
+            
+            var sprite = _towerManager.GetNextGradeSprite(towerId);
+            upgradeButton.InitForUpgrade(sprite, towerParams.UpgradePrice, () =>
             {
                 _towerManager.TryUpgradeTower(towerId);
                 Hide();
@@ -36,6 +38,7 @@ public class TowerButtonsHolder : MonoBehaviour
             //Логику кнопки Salvage
             var salvageButton = _towerButtons[buttonIndex];
             buttonIndex++;
+            
             var emptyIcon = _towerManager.GetTypeSprite(TowerType.Empty);
             salvageButton.InitForSalvage(emptyIcon, towerParams.SalvagePrice, () =>
             {

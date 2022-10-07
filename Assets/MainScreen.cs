@@ -15,7 +15,7 @@ public class MainScreen : MonoBehaviour
 
     private Player _player;
     private TowerManager _towerManager;
-    
+
     [Inject]
     private void Construct(Player player, TowerManager towerManager)
     {
@@ -25,13 +25,14 @@ public class MainScreen : MonoBehaviour
 
     private void Start()
     {
+        _player.HealthProperty.Subscribe(HealthChanged);
+        _player.MoneyProperty.Subscribe(MoneyChanged);
+
         HealthChanged(_player.Health);
         MoneyChanged(_player.Money);
         _enemiesKilledText.text = enemiesKilledPrefix;
 
         //TODO - on signal bus
-        _player.HealthProperty.Subscribe(HealthChanged);
-        _player.MoneyProperty.Subscribe(MoneyChanged);
 
         _player.PlayerDead += PlayerDead;
         _towerManager.OnTowerClicked += TowerClicked;
