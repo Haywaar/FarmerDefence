@@ -45,7 +45,6 @@ public class EnemyPositionController : MonoBehaviour
             {
                MoveEnemy(enemy);
             }
-            _positionGrid.DebugValidateAlgorithm(enemy.ID);
         }
         
         foreach (var tower in _towerManager.Towers)

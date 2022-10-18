@@ -99,32 +99,4 @@ public class EnemyPositionGrid
         //TODO - To find out why distinct required
         return enemiesList.Distinct().ToList();
     }
-
-    public void DebugValidateAlgorithm(int enemyId)
-    {
-        List<Vector2> positions = new List<Vector2>();
-        for (int i = 0; i < NUM_CELLS; i++)
-        {
-            for (int j = 0; j < NUM_CELLS; j++)
-            {
-                var enemiesList = _enemiesInCells[i, j];
-                foreach (var enemy in enemiesList)
-                {
-                    if (enemy.ID == enemyId)
-                    {
-                       positions.Add(new Vector2(i,j));
-                    }
-                }
-            }
-        }
-
-        if (positions.Count > 1)
-        {
-            foreach (var pos in positions)
-            {
-                Debug.LogWarningFormat("something wrong EnemyId {0} !" + enemyId + "pos[{1},{2} ", enemyId, pos.x, pos.y);
-            }
-        }
-    }
-
 }
