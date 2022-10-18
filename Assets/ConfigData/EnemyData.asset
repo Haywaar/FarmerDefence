@@ -13,11 +13,27 @@ MonoBehaviour:
   m_Name: EnemyData
   m_EditorClassIdentifier: 
   _enemyRecords:
+  - EnemyType: 1
+    EnemyParams:
+    - Grade: 1
+      MovementSpeed: 1
+      MaxHealth: 5
+      DamageValue: 2
+      RewardPrice: 15
+      Prefab: {fileID: 7074515490191977853, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}
+      Material: {fileID: 2100000, guid: a5d685ddd6795a54faefdd370161a580, type: 2}
+    - Grade: 2
+      MovementSpeed: 1
+      MaxHealth: 10
+      DamageValue: 2
+      RewardPrice: 30
+      Prefab: {fileID: 7074515490191977853, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}
+      Material: {fileID: 2100000, guid: bd7a8c90e89098d4785b141321bb6190, type: 2}
   - EnemyType: 0
     EnemyParams:
     - Grade: 1
       MovementSpeed: 1
-      MaxHealth: 3
+      MaxHealth: 2
       DamageValue: 1
       RewardPrice: 5
       Prefab: {fileID: 6991671029649060789, guid: 17b2a51b8abaa2849bf708ade6416014, type: 3}
@@ -36,19 +52,3 @@ MonoBehaviour:
       RewardPrice: 15
       Prefab: {fileID: 6991671029649060789, guid: 17b2a51b8abaa2849bf708ade6416014, type: 3}
       Material: {fileID: 2100000, guid: ea8a5927e7f135046b190c2197cf5d81, type: 2}
-  - EnemyType: 1
-    EnemyParams:
-    - Grade: 1
-      MovementSpeed: 1
-      MaxHealth: 5
-      DamageValue: 2
-      RewardPrice: 15
-      Prefab: {fileID: 7074515490191977853, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}
-      Material: {fileID: 2100000, guid: a5d685ddd6795a54faefdd370161a580, type: 2}
-    - Grade: 2
-      MovementSpeed: 1
-      MaxHealth: 10
-      DamageValue: 2
-      RewardPrice: 30
-      Prefab: {fileID: 7074515490191977853, guid: 73cb24de0fdae2f48a8fde58a028b7f2, type: 3}
-      Material: {fileID: 2100000, guid: bd7a8c90e89098d4785b141321bb6190, type: 2}

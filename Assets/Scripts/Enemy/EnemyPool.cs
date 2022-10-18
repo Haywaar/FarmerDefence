@@ -37,7 +37,6 @@ public class EnemyPool
     public void Release(AbstractEnemy enemy)
     {
         enemy.gameObject.SetActive(false);
-        enemy.Reset();
     }
 
     private AbstractEnemy Create()

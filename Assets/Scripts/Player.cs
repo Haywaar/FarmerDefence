@@ -1,8 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using Zenject;
+using Zenject.Signals;
 
 public class Player : MonoBehaviour
 {
@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     public readonly IntReactiveProperty HealthProperty = new IntReactiveProperty();
     public readonly IntReactiveProperty MoneyProperty = new IntReactiveProperty();
     public Action PlayerDead;
-    
+
     public int Money
     {
         get => _money;
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
                 _money = value;
             }
 
-           MoneyProperty.Value = _money;
+            MoneyProperty.Value = _money;
         }
     }
 
@@ -60,6 +60,31 @@ public class Player : MonoBehaviour
         }
     }
 
+    private SignalBus _signalBus;
+
+    [Inject]
+    private void Construct(SignalBus signalBus)
+    {
+        _signalBus = signalBus;
+
+        _signalBus.Subscribe<EnemyKilledSignal>(OnEnemyKilled);
+        _signalBus.Subscribe<ChangeMoneySignal>(ChangeMoney);
+    }
+
+    private void ChangeMoney(ChangeMoneySignal signal)
+    {
+        Money += signal.MoneyDelta;
+
+        if (signal.MoneyDelta > 0)
+        {
+            // positive effect/ui logic
+        }
+        else if (signal.MoneyDelta < 0)
+        {
+            // negative/spending effect logic
+        }
+    }
+
     public void DamagePlayer(int value)
     {
         Health -= value;
@@ -74,21 +99,8 @@ public class Player : MonoBehaviour
         return Health > 0;
     }
 
-    //TODO Not sure that player should be responsible for this
-    public void OnMonsterDead(int value)
+    private void OnEnemyKilled(EnemyKilledSignal signal)
     {
-        Money += value;
-    }
-
-    //TODO add enum with reason of reduce
-    public void ReduceMoney(int value)
-    {
-      Money -= value;
-    }
-    
-    public void AddMoney(int value)
-    {
-        Money += value;
-        //TODO - play happy sound effect
+        Money += signal.RewardPrice;
     }
 }

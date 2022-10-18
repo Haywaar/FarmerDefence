@@ -1,20 +1,20 @@
-using UnityEngine;
+using Zenject;
 
 namespace Towers.Executor
 {
-   public class ExecutorFabric : MonoBehaviour
+   public static class ExecutorFabric
    {
-      public static Executor GetExecutor(TowerType type)
+      public static Executor GetExecutor(int towerId, TowerType type, SignalBus signalBus)
       {
          switch (type)
          {
             case TowerType.Empty:
-               return new EmptyExecutor();
+               return new EmptyExecutor(towerId, signalBus);
             case TowerType.FastTower:
             case TowerType.HeavyTower:
-               return new ShootingExecutor();
+               return new ShootingExecutor(towerId, signalBus);
             default:
-               return new EmptyExecutor();
+               return new EmptyExecutor(towerId, signalBus);
          }
       }
    }

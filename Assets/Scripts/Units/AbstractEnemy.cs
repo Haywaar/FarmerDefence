@@ -1,11 +1,13 @@
-using System;
 using System.Collections.Generic;
-using DG.Tweening;
+using Enemy;
 using UnityEngine;
 using Zenject;
+using Zenject.Signals;
 
 namespace Units
 {
+    //TODO - Refactor parameters, move it to submodule
+    //TODO - Change abstract enemy on enemy, move diff behaviour in submodule
     public abstract class AbstractEnemy : MonoBehaviour
     {
         [SerializeField] protected float _movementSpeed;
@@ -17,30 +19,32 @@ namespace Units
 
         [SerializeField] protected List<MeshRenderer> _colorableMeshes;
 
+        public int ID { get; private set; }
+
         public EnemyType EnemyType => _enemyType;
-
-        private bool _isDead = false;
-
-        public bool IsDead => _isDead;
+        public bool IsDead { get; private set; }
 
         private int _waypointId = 0;
         private List<Transform> _waypoints;
         private float _moveKoef = 1f;
         private const float MIN_SLOW_KOEF = .3f;
-        public event Action<AbstractEnemy> OnEnemyDied;
+        
         protected EnemyManager _enemyManager;
         protected Player _player;
         protected WaypointManager _waypointManager;
+        private SignalBus _signalBus;
 
         [Inject]
-        private void Construct(EnemyManager enemyManager, Player player, WaypointManager waypointManager)
+        private void Construct(EnemyManager enemyManager, Player player, WaypointManager waypointManager, SignalBus signalBus)
         {
             _enemyManager = enemyManager;
             _player = player;
             _waypointManager = waypointManager;
+            _signalBus = signalBus;
+            _signalBus.Subscribe<EnemyDamagedSignal>(OnDamageTaken);
         }
 
-        public int Health
+        private int Health
         {
             get => _health;
             set
@@ -68,8 +72,13 @@ namespace Units
         {
             _waypointId = 0;
             _health = _maxHealth;
-            _isDead = false;
+            IsDead = false;
             _waypoints = _waypointManager.GetPositions();
+        }
+
+        private void Awake()
+        {
+            ID = EnemyManager.GenerateEnemyId();
         }
 
         public void Init(EnemyParams enemyParams, EnemyType enemyType)
@@ -89,10 +98,9 @@ namespace Units
             Reset();
         }
 
-        public virtual void Move()
+        public virtual void Move(Vector3 newPos)
         {
-            var step = _movementSpeed * Time.deltaTime * _moveKoef;
-            transform.position = Vector3.MoveTowards(transform.position, _waypoints[_waypointId].position, step);
+            transform.position = newPos;
 
             transform.LookAt(_waypoints[_waypointId].position);
 
@@ -108,11 +116,32 @@ namespace Units
                     _waypointId++;
                 }
             }
-        } 
+        }
 
-        public virtual void OnDamageTaken(int damageValue)
+        public Vector3 GetNextStepPosition()
         {
-            Health -= damageValue;
+            var step = _movementSpeed * Time.deltaTime * _moveKoef;
+            return Vector3.MoveTowards(transform.position, _waypoints[_waypointId].position, step);
+        }
+
+        public float GetDistanceToWaypoint()
+        {
+            return Vector3.Distance(transform.position, _waypoints[_waypointId].position);
+        }
+
+        public int GetWaypointId()
+        {
+            return _waypointId;
+        }
+
+        private void OnDamageTaken(EnemyDamagedSignal signal)
+        {
+            if (ID != signal.EnemyId)
+            {
+                return;
+            }
+
+            Health -= signal.DamageValue;
 
             if (Health <= 0)
             {
@@ -120,21 +149,20 @@ namespace Units
             }
         }
 
-        public virtual void EnemyDead()
+        private void EnemyDead()
         {
-            if (!_isDead)
+            if (!IsDead)
             {
-                _isDead = true;
-                //TODO - On signal BUS
-                _player.OnMonsterDead(_rewardPrice);
-                OnEnemyDied?.Invoke(this);
+                IsDead = true;
+
+                _signalBus.Fire(new EnemyKilledSignal(this, _rewardPrice));
                 _enemyManager.Dispose(this);
             }
         }
 
         public bool CanMove()
         {
-            return !_isDead && _player.IsAlive();
+            return !IsDead && _player.IsAlive();
         }
 
         //TODO set stacking logic (2 slow towers at 1 enemy)
@@ -153,6 +181,5 @@ namespace Units
                 _moveKoef = slowKoef;
             }
         }
-
     }
 }

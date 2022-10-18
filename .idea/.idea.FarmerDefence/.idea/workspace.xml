@@ -23,29 +23,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ed063058-a4b9-427b-854a-1376876e05d1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FarmerDefence/.idea/contentModel.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FarmerDefence/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FarmerDefence/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FarmerDefence/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FarmerDefence/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FarmerDefence/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FarmerDefence/riderModule.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/MainScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/MainScreen.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Images/tower.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Images/tower.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Models/W_Tower_1.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Models/W_Tower_1.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Models/W_Tower_2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Models/W_Tower_2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Models/W_Tower_3.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Models/W_Tower_3.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Models/towerHolder.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Models/towerHolder.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Towers/TowerFast_g1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Towers/TowerFast_g1.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Towers/TowerFast_g2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Towers/TowerFast_g2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/Towers/TowerFast_g3.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/Towers/TowerFast_g3.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Materials/WallsMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Materials/WallsMaterial.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Models/Gate.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Models/Gate.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Prefabs/TowerPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Prefabs/TowerPrefab.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Main.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Main.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/TowerData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Towers/TowerData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyData.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyData.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemySpawners/PeriodicEnemySpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemy/EnemySpawners/PeriodicEnemySpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/Executor/EmptyExecutor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Towers/Executor/EmptyExecutor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/Executor/Executor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Towers/Executor/Executor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/Executor/ExecutorFabric.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Towers/Executor/ExecutorFabric.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/Executor/ShootingExecutor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Towers/Executor/ShootingExecutor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/Executor/SlowExecutor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Towers/Executor/SlowExecutor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/Tower.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Towers/Tower.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/TowerConvertData.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/TowerConvertData.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/TowerData.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/TowerData.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/TowerData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Towers/TowerData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Towers/TowerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Towers/TowerManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/TowerButtonsHolder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/TowerButtonsHolder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Units/AbstractEnemy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Units/AbstractEnemy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Zenject/SceneInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Zenject/SceneInstaller.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Zenject/Signals/SpawnEnemySignal.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Zenject/Signals/SpawnEnemySignal.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
@@ -58,9 +65,17 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/ab/1841a00c/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6073cf49ed704e958b8a66d540dea94846a800/2f/e1310c7d/EncodingTable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6073cf49ed704e958b8a66d540dea94846a800/4e/65b7977f/ArraySortHelper`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6073cf49ed704e958b8a66d540dea94846a800/84/f84653fd/IntrospectiveSortUtilities.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6073cf49ed704e958b8a66d540dea94846a800/9a/b7332792/TaskAwaiter.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6d7c4c8dd3624dc596686fb7270ae1e6283e00/22/55aa954e/Socket.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/DialogManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyFabric.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyPool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnemyPositionController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/EnemyPositionGrid.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FarmerPool.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/PlayerGate.cs" root0="FORCE_HIGHLIGHTING" />
@@ -77,7 +92,11 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Units/MeleeEnemy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/WaypointManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Zenject/SceneInstaller.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Zenject/Signals/SpawnEnemySignal.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Zenject/Signals/ChangeMoneySignal.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Zenject/Signals/EnemyDamagedSignal.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Zenject/Signals/EnemyInRadiusSignal.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Zenject/Signals/EnemySpawnSignal.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Manipulators/Move/MoveItemModeReplace.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.7.6/Runtime/VisualScripting.Core/Unity/ISingleton.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.7.6/Runtime/VisualScripting.Core/Unity/SceneSingleton.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../HALS_gamejam/HALS_Gamejam/Assets/Scripts/LevelManager.cs" root0="SKIP_HIGHLIGHTING" />
@@ -153,7 +172,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "XThreadsFramesViewSplitterKey": "0.32358003",
+    "XThreadsFramesViewSplitterKey": "0.4089422",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -176,10 +195,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="23760">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="21036">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="23760" />
+      <option name="pid" value="21036" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -210,6 +229,11 @@
       <workItem from="1663424317020" duration="4316000" />
       <workItem from="1664823431786" duration="1287000" />
       <workItem from="1665085705742" duration="1844000" />
+      <workItem from="1665212865680" duration="12515000" />
+      <workItem from="1665598652182" duration="3349000" />
+      <workItem from="1665827922012" duration="7200000" />
+      <workItem from="1665985796365" duration="5039000" />
+      <workItem from="1666035297788" duration="7630000" />
     </task>
     <servers />
   </component>
@@ -237,32 +261,22 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/InputController.cs</url>
-          <line>34</line>
-          <properties documentPath="C:\Work\Unity Projects\FarmerDefence\FarmerDefence\Assets\Scripts\InputController.cs" initialLine="34" containingFunctionPresentation="method 'ClickOnHolderLogic'">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/EnemyPositionGrid.cs</url>
+          <line>97</line>
+          <properties documentPath="C:\Work\Unity Projects\FarmerDefence\FarmerDefence\Assets\Scripts\EnemyPositionGrid.cs" initialLine="96" containingFunctionPresentation="method 'GetEnemiesInRadius'">
             <startOffsets>
-              <option value="848" />
+              <option value="2881" />
             </startOffsets>
             <endOffsets>
-              <option value="904" />
+              <option value="2967" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/InputController.cs</url>
-          <line>32</line>
-          <properties documentPath="C:\Work\Unity Projects\FarmerDefence\FarmerDefence\Assets\Scripts\InputController.cs" initialLine="32" containingFunctionPresentation="method 'ClickOnHolderLogic'">
-            <startOffsets>
-              <option value="771" />
-            </startOffsets>
-            <endOffsets>
-              <option value="809" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint enabled="true" type="DotNet Exception Breakpoints" />
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
 </project>

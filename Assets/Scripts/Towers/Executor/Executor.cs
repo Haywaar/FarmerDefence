@@ -2,31 +2,33 @@ using System;
 using System.Collections.Generic;
 using Units;
 using UnityEngine;
+using Zenject;
+using Zenject.Signals;
 
 namespace Towers.Executor
 {
     public abstract class Executor
     {
         protected List<AbstractEnemy> _targetList = new List<AbstractEnemy>();
+        protected SignalBus _signalBus;
+        protected int _towerId;
+
+        public Executor(int towerId, SignalBus signalBus)
+        {
+            _signalBus = signalBus;
+            _towerId = towerId;
+            
+            _signalBus.Subscribe<EnemyInRadiusSignal>(SetTargetList);
+        }
+
         public abstract void Execute(TowerParams towerParams, Vector3 shootPos);
 
-        public void AddEnemy(AbstractEnemy enemy)
+        private void SetTargetList(EnemyInRadiusSignal signal)
         {
-            _targetList.Add(enemy);
-        }
-
-        public void RemoveEnemy(AbstractEnemy enemy)
-        {
-            if (_targetList.Contains(enemy))
+            if (_towerId == signal.TowerId)
             {
-                _targetList.Remove(enemy);
-                EnemyRemoved(enemy);
+                _targetList = signal.EnemiesInRadius;
             }
-        }
-
-        protected virtual void EnemyRemoved(AbstractEnemy enemy)
-        {
-            // override me
         }
     }
 }

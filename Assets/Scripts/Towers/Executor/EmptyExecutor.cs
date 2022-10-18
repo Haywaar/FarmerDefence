@@ -1,7 +1,5 @@
-
-using System.Collections.Generic;
-using Units;
 using UnityEngine;
+using Zenject;
 
 namespace Towers.Executor
 {
@@ -10,6 +8,10 @@ namespace Towers.Executor
         public override void Execute(TowerParams towerParams, Vector3 shootPos)
         {
             //do nothing
+        }
+
+        public EmptyExecutor(int towerId, SignalBus signalBus) : base(towerId, signalBus)
+        {
         }
     }
 }

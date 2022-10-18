@@ -1,8 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Towers.Executor;
-using Units;
 using UnityEngine;
 using Zenject;
 
@@ -29,19 +26,22 @@ namespace Towers
 
       private Player _player;
       private TowerManager _towerManager;
+      private SignalBus _signalBus;
 
       [Inject]
-      private void Construct(Player player, TowerManager towerManager)
+      private void Construct(Player player, TowerManager towerManager, SignalBus signalBus)
       {
          _player = player;
          _towerManager = towerManager;
+         _signalBus = signalBus;
       }
 
       private void Init()
       {
          _towerId = _towerManager.Register(this);
          _params = _towerManager.GetParams(_towerType, _grade);
-         _executor = ExecutorFabric.GetExecutor(_towerType);
+         _executor = ExecutorFabric.GetExecutor(_towerId, _towerType, _signalBus);
+
          ChangeView();
       }
 
@@ -49,32 +49,6 @@ namespace Towers
       {
          Init();
          StartCoroutine(ExecutingCoroutine());
-      }
-
-      //TODO check if it possible to refactor, to avoid OnTrigger and do it by position analysis
-      private void OnTriggerEnter(Collider other)
-      {
-         var enemy = other.GetComponent<AbstractEnemy>();
-         if (enemy != null)
-         {
-            _executor.AddEnemy(enemy);
-            enemy.OnEnemyDied += OnEnemyDied;
-         }
-      }
-
-      private void OnTriggerExit(Collider other)
-      {
-         var enemy = other.GetComponent<AbstractEnemy>();
-         if (enemy != null)
-         {
-            enemy.OnEnemyDied -= OnEnemyDied;
-            _executor.RemoveEnemy(enemy);
-         }
-      }
-
-      private void OnEnemyDied(AbstractEnemy enemy)
-      {
-         _executor.RemoveEnemy(enemy);
       }
 
       private IEnumerator ExecutingCoroutine()
@@ -107,7 +81,7 @@ namespace Towers
       public void ChangeType(TowerType towerType)
       {
          _towerType = towerType;
-         _executor = ExecutorFabric.GetExecutor(_towerType);
+         _executor = ExecutorFabric.GetExecutor(_towerId, _towerType, _signalBus);
       }
 
       public void ChangeView()
@@ -115,7 +89,7 @@ namespace Towers
          //TODO - assert logic
          if (_prefabRoot == null)
          {
-            Debug.LogError("NO PREFAB ROOT DETECTED");
+            Debug.LogError("No prefab root detected");
             return;
          }
 

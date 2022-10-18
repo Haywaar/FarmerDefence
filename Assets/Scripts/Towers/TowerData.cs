@@ -20,6 +20,7 @@ public class TowerParams
     public int UpgradePrice;
     public int SalvagePrice;
     public float AttackCooldown;
+    public float Radius;
     public GameObject Prefab;
     public Sprite TowerIcon;
     public GameObject ShootPrefab;

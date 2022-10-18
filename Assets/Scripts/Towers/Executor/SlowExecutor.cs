@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using Towers.Executor;
-using Units;
 using UnityEngine;
+using Zenject;
 
 public class SlowExecutor : Executor
 {
@@ -14,8 +12,7 @@ public class SlowExecutor : Executor
         }
     }
 
-    protected override void EnemyRemoved(AbstractEnemy enemy)
+    public SlowExecutor(int towerId, SignalBus signalBus) : base(towerId, signalBus)
     {
-        enemy.SetSlowKoef(1f);
     }
 }

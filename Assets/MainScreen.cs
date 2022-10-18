@@ -1,3 +1,4 @@
+using Towers;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -33,7 +34,6 @@ public class MainScreen : MonoBehaviour
         _enemiesKilledText.text = enemiesKilledPrefix;
 
         //TODO - on signal bus
-
         _player.PlayerDead += PlayerDead;
         _towerManager.OnTowerClicked += TowerClicked;
     }
