@@ -1,3 +1,5 @@
+using Enemy.Meta;
+
 namespace Zenject.Signals
 {
     public class EnemySpawnSignal

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Enemy;
+using Enemy.Meta;
 using UnityEngine;
 using Zenject;
 using Zenject.Signals;

@@ -15,11 +15,11 @@ MonoBehaviour:
   _convertRecords:
   - fromTowerType: 0
     fromGrade: 1
-    toTowerType: 1
-    toGrade: 1
-    convertPrice: 50
-  - fromTowerType: 0
-    fromGrade: 1
     toTowerType: 2
     toGrade: 1
     convertPrice: 75
+  - fromTowerType: 0
+    fromGrade: 1
+    toTowerType: 1
+    toGrade: 1
+    convertPrice: 50

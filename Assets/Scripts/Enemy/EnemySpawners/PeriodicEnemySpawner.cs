@@ -3,6 +3,7 @@ using UnityEngine;
 using Zenject;
 using Zenject.Signals;
 using Cysharp.Threading.Tasks;
+using Enemy.Meta;
 
 namespace Enemy.EnemySpawners
 {
